@@ -1,112 +1,57 @@
-# React homework template
+## Preparing for work
 
-Цей проект був створений за допомогою
-[Create React App](https://github.com/facebook/create-react-app). Для знайомства
-і налаштування додаткових можливостей
-[звернися до документації](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Make sure that the LTS version of Node.js is installed on the computer.
+   [Download and install](https://nodejs.org/en/) if necessary.
+2. Install the project's basic dependencies using the `npm install` command.
+3. Start the development mode, execute the `npm start` command.
+4. Go to [http://localhost:3000](http://localhost:3000) in the browser. This
+   page will automatically reload after saving the changes project files.
 
-## Створення репозиторію за шаблоном
+---
 
-Використовуй цей репозиторій організації GoIT як шаблон для створення репозиторію
-свого проєкта. Для цього натисни на кнопку `«Use this template»` і вибери опцію
-`«Create a new repository»`, як показано на зображенні.
+### Movie search
 
-![Creating repo from a template step 1](./assets/template-step-1.png)
+Create a basic routing for the movie search and storage application. Preview the
+working application at the
+[link](https://drive.google.com/file/d/1vR0hi3n1236Q5Bg4-se-8JVKD9UKSfId/view)
+below.
 
-На наступному кроці відкриється сторінка створення нового репозиторію. Заповни поле
-його імені, переконайся що репозиторій публічний, після чого натисни кнопку
-`«Create repository from template»`.
+#### themoviedb.org API
 
-![Creating repo from a template step 2](./assets/template-step-2.png)
+For the backend, use the [themoviedb.org API](https://www.themoviedb.org/). It
+is necessary to register (you can enter arbitrary data) and get an API key. The
+following endpoints will be used in this work.
 
-Після того як репозиторій буде створено, необхідно перейти в налаштування
-створеного репозиторію на вкладку `Settings` > `Actions` > `General` як
-показано на зображенні.
+- [/trending/get-trending](https://developer.themoviedb.org/reference/trending-all):
+  A list of the most popular movies today to create a collection on the
+  homepage.
+- [/search/search-movies](https://developer.themoviedb.org/reference/search-movie):
+  Search for a movie by keyword on the movies page.
+- [/movies/get-movie-details](https://developer.themoviedb.org/reference/movie-details):
+  Request for full information about the movie for the movie page.
+- [/movies/get-movie-credits](https://developer.themoviedb.org/reference/movie-credits):
+  Request for information about the cast for the movie page.
+- [/movies/get-movie-reviews](https://developer.themoviedb.org/reference/movie-reviews):
+  Request for reviews for the movie page.
 
-![Settings GitHub Actions permissions step 1](./assets/gh-actions-perm-1.png)
+The documentation can be found at:
+[link](https://developer.themoviedb.org/docs/getting-started)
 
-Проскроливши сторінку до самого кінця, у секції `«Workflow permissions»` вибери
-опцію `«Read and write permissions»` і постав галочку в чекбоксі. Це
-необхідно для автоматизації процесу деплою проєкту.
+#### Routes
 
-![Settings GitHub Actions permissions step 2](./assets/gh-actions-perm-2.png)
+In the application, there should be the following routes. If a user navigates to
+a non-existent route, they should be redirected to the home page.
 
-Тепер у тебе є особистий репозиторій проекту, зі структурою файлів і папок
-репозиторію-шаблону. Далі працюй із ним як із будь-яким іншим особистим репозиторієм,
-клонуй його собі на комп'ютер, пиши код, роби комміти і відправляй їх на
-GitHub.
+- `/` - The `Home` component, the homepage with a list of popular movies.
+- `/movies` - The `Movies` component, a page for searching movies by keyword.
+- `/movies/:movieId` - The `MovieDetails` component, a page with detailed
+  information about the movie.
+- `/movies/:movieId/cast` - The `Cast` component, information about the cast.
+  Rendered on the `MovieDetails` page.
+- `/movies/:movieId/reviews` - The `Reviews` component, information about
+  reviews. Rendered on the `MovieDetails` page.
 
-## Підготовка до роботи
+#### Code Splitting
 
-1. Переконайся що на комп'ютері встановлено LTS-версія Node.js.
-   [Завантаж і встанови](https://nodejs.org/en/) її якщо необхідно.
-2. Встанови базові залежності проєкту командою `npm install`.
-3. Запусти режим розробки, виконавши команду `npm start`.
-4. Перейди в браузері за адресою [http://localhost:3000](http://localhost:3000).
-   Ця сторінка буде автоматично перезавантажуватися після збереження змін у файлах проєкту.
-
-## Деплой
-
-Продакшн версія проєкту буде автоматично проходити лінтинг, збиратися і
-деплоїтися на GitHub Pages, у гілку `gh-pages`, щоразу, коли оновлюється
-гілка `main`. Наприклад, після прямого пушу або прийнятого пул-реквесту. Для цього
-необхідно у файлі `package.json` відредагувати поле `homepage`, замінивши
-`your_username` і `your_repo_name` на свої, і відправити зміни на GitHub.
-
-```json
-"homepage": "https://your_username.github.io/your_repo_name/"
-```
-
-Далі необхідно зайти в налаштування GitHub-репозиторію (`Settings` > `Pages`) і
-виставити роздачу продакшн-версії файлів із папки `/root` гілки `gh-pages`, якщо
-це не було зроблено автоматично.
-
-![GitHub Pages settings](./assets/repo-settings.png)
-
-### Статус деплоя
-
-Статус деплою крайнього коміту відображається іконкою біля його ідентифікатора.
-
-- **Жовтий колір** - виконується збірка і деплой проєкту.
-- **Зелений колір** - деплой завершився успішно.
-- **Червоний колір** - під час лінтингу, сборки або деплою сталася помилка.
-
-Детальнішу інформацію про статус можна подивитися, клікнувши на іконку, і
-у вікні, що випадає, перейти за посиланням `Details`.
-
-![Deployment status](./assets/deploy-status.png)
-
-### Жива сторінка
-
-Через якийсь час, зазвичай кілька хвилин, живу сторінку можна буде подивитися
-за адресою, вказаною у відредагованій властивості `homepage`. Наприклад, ось
-посилання на живу версію для цього репозиторію
-[https://goitacademy.github.io/react-homework-template](https://goitacademy.github.io/react-homework-template).
-
-Якщо відкривається порожня сторінка, переконайся, що у вкладці `Console` немає помилок
-пов'язаних із неправильними шляхами до CSS і JS файлів проєкту (**404**). Швидше 
-за все у тебе неправильне значення властивості `homepage` у файлі `package.json`.
-
-### Маршрутизація
-
-Якщо додаток використовує бібліотеку `react-router-dom` для маршрутизації,
-необхідно додатково налаштувати компонент `<BrowserRouter>`, передавши у пропе
-`basename` точну назву твого репозиторію. Слеш на початку рядка обов'язковий.
-
-```jsx
-<BrowserRouter basename="/your_repo_name">
-  <App />
-</BrowserRouter>
-```
-
-## Як це працює
-
-![How it works](./assets/how-it-works.png)
-
-1. Після кожного пушу в гілку `main` GitHub-репозиторія, запускається спеціальний
-   скрипт (GitHub Action) з файла `.github/workflows/deploy.yml`.
-2. Усі файли репозиторію копіюються на сервер, де проект ініціалізується і
-   проходить лінтинг і збірку перед деплоєм.
-3. Якщо всі кроки пройшли успішно, зібрана продакшн-версія файлів проєкту
-   відправляється в гілку `gh-pages`. В іншому випадку, в лозі виконання
-   скрипта буде вказано в чому проблема.
+Add asynchronous loading of JS code for application routes using React.lazy()
+and Suspense.
